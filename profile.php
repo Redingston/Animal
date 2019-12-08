@@ -3,7 +3,7 @@ include_once "_header.php";
 include_once "_navbar.php";
 ?>
 <?php include_once "connect_db.php"; ?>
-    <div class="conteiner">
+    <div class="container">
         <div class="row">
             <table class="table">
                 <thead>
@@ -15,7 +15,7 @@ include_once "_navbar.php";
                 </tr>
                 </thead>
                 <tbody>
-            
+
 
                 <tr>
                     <th scope="row">1</th>

@@ -21,7 +21,10 @@
                     <a class="nav-link" href="/profile.php">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/registration.php">Sing in / Sing out</a>
+                    <a class="nav-link" href="/registration.php">Sing Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login.php">Sing in</a>
                 </li>
             </ul>
         </div>
