@@ -7,20 +7,38 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     else
         $errors['email']='Email is required';
 
-    $email='';
+    $phone='';
     if (isset($_POST['phone']) and !empty($_POST['phone']))
-        $email=$_POST['phone'];
+        $phone=$_POST['phone'];
     else
         $errors['phone']='Phone is required';
 
-    $email='';
+    $password='';
     if (isset($_POST['password']) and !empty($_POST['password']))
-        $email=$_POST['password'];
+        $password=$_POST['password'];
     else
         $errors['password']='Password is required';
 
     if (count($errors)==0){
+        include_once "lib/image_compresor.php";
+        include_once "connect_db.php";
 
+        $uploaddir=$_SERVER['DOCUMENT_ROOT'].'/uploads/';
+        $file_name=uniqid('300_').'.jpg';
+        $file_save_path=$uploaddir.$file_name;
+        my_image_resize(600,400,$file_save_path,'image');
+
+        $urlPath="/uploads/".$file_name;
+        $sql = "INSERT INTO tb_user (UserName, Email, Phone, Password, Photo) VALUES (?,?,?,?,?)";
+        $stmt= $dbh->prepare($sql);
+        $stmt->execute([$email, $email, $phone, $password, $urlPath]);
+        header("Location: /profile.php");
+        exit;
+        // if(move_uploaded_file($_FILES['image']['temp_name'],$file_save_path)){
+        //     echo "The file is valid and the download is successful.\n";
+        // } else{
+        //     echo "File download attack is possible.\n";
+        // }
     }
 }
 ?>
@@ -34,7 +52,7 @@ include_once "helpers/input_creator.php";
     <div class="row mt-3">
         <div class="offset-md-3 col-md-6">
             <h1>Sign Up for Free</h1>
-            <form method="post" id="form_register">
+            <form method="post" id="form_register" enctype="multipart/form-data">
                 <?php create_input("email", "Email:", "email", $errors); ?>
                 <?php create_input("phone", "Phone:", "text", $errors); ?>
                 <?php create_input("password", "Password:", "password", $errors); ?>
