@@ -9,10 +9,9 @@ include_once "_navbar.php";
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col"></th>
                     <th scope="col">User</th>
                     <th scope="col">Email</th>
-                    
                 </tr>
                 </thead>
                 <tbody>

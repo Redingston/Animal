@@ -31,7 +31,8 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
         $urlPath="/uploads/".$file_name;
         $sql = "INSERT INTO tb_user (UserName, Email, Phone, Password, Photo) VALUES (?,?,?,?,?)";
         $stmt= $dbh->prepare($sql);
-        $stmt->execute([$email, $email, $phone, $password, $urlPath]);
+        $hash=password_hash($password,PASSWORD_DEFAULT);
+        $stmt->execute([$email, $email, $phone, $hash, $urlPath]);
         header("Location: /profile.php");
         exit;
         // if(move_uploaded_file($_FILES['image']['temp_name'],$file_save_path)){
